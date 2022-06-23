@@ -18,7 +18,7 @@ class Picture {
   Urls? urls;
   Links? links;
   User? user;
-  late Image image;
+  Image? image;
   final key = GlobalKey();
   Picture({
     this.id,

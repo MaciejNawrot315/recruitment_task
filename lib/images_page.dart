@@ -46,9 +46,13 @@ class _ImagesPageState extends State<ImagesPage> {
             }
             return Center(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
                   CircularProgressIndicator(),
-                  Text("Pictures are loading...")
+                  Text(
+                    "Pictures are loading...",
+                    style: TextStyle(color: Colors.white),
+                  )
                 ],
               ),
             );

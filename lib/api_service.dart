@@ -11,8 +11,10 @@ Future<List<Picture>> fetchPictures() async {
     'count': picturesToDisplay.toString()
   };
   var url = Uri.https(baseUrl, photosEndpoint + '/random', queryParameters);
-  var response = await http.get(url,
-      headers: {'Accept-Version': 'v1', 'Authorization': 'Client-ID xxx'});
+  var response = await http.get(url, headers: {
+    'Accept-Version': 'v1',
+    'Authorization': 'Client-ID NPVcu7PntHBText7CYd86FSnBkcvwrqxwueK19f8X1Q'
+  });
   final List<dynamic> pictureMapList = decoder.convert(response.body);
   List<Picture> pictureList = [];
   for (Map i in pictureMapList) {
