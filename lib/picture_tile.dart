@@ -73,7 +73,7 @@ class _PictureTileState extends State<PictureTile> {
                   )
                 : Column(children: [
                     GestureDetector(
-                      onTap: () => debugPrint("picture clicked"),
+                      onTap: () => _goToDetails(widget.picture),
                       child: widget.picture.image!,
                     ),
                     Flex(
