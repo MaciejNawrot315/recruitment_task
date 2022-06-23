@@ -40,3 +40,7 @@ const Map<int, Color> myPinkMap = {
 };
 const MaterialColor myPink = MaterialColor(0xFFdd3e54, myPinkMap);
 var themeColors = const [myGreen, myBlue, myPink];
+
+const String baseUrl = 'api.unsplash.com';
+const String photosEndpoint = '/photos';
+int picturesToDisplay = 30;

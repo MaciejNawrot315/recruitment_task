@@ -9,14 +9,12 @@ class FavouriteImagesPage extends StatefulWidget {
 class _FavouriteImagesPageState extends State<FavouriteImagesPage> {
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView(
-        children: [
-          ListTile(
-            title: const Text('I love my favourite pizza'),
-          )
-        ],
-      ),
+    return ListView(
+      children: [
+        ListTile(
+          title: const Text('I love my favourite pizza'),
+        )
+      ],
     );
   }
 }

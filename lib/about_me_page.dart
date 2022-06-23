@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recruitment_task/api_service.dart';
 
 class AboutMePage extends StatefulWidget {
   const AboutMePage({super.key});
@@ -9,14 +10,21 @@ class AboutMePage extends StatefulWidget {
 class _AboutMePageState extends State<AboutMePage> {
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView(
-        children: [
-          ListTile(
-            title: const Text('I love fries'),
-          )
-        ],
-      ),
+    return ListView(
+      children: [
+        ListTile(
+          title: const Text('I love fries'),
+          trailing: Icon(Icons.arrow_drop_down),
+        ),
+        ListTile(
+          title: const Text('I love fries'),
+          trailing: Icon(Icons.arrow_drop_down),
+        ),
+        ListTile(
+          title: const Text('I love fries'),
+          trailing: Icon(Icons.arrow_drop_down),
+        )
+      ],
     );
   }
 }

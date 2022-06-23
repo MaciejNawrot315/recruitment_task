@@ -44,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   bool _isLargeScreen(BuildContext context) {
-    return MediaQuery.of(context).size.width > 640.0;
+    return MediaQuery.of(context).size.width > 768.0;
   }
 
 //   bool _isMediumScreen(BuildContext context) {
@@ -56,38 +56,34 @@ class _MyHomePageState extends State<MyHomePage> {
       return Theme(
         data: ThemeData(primarySwatch: themeColors[_selectedIndex]),
         child: Scaffold(
-            // appBar: AppBar(
-            //   centerTitle: true,
-            //   shape: RoundedRectangleBorder(
-            //       borderRadius: BorderRadius.only(
-            //     bottomRight: Radius.circular(36),
-            //   )),
-            //   title: const Text("About Me"),
-            // ),
-            body: Row(
-          children: [
-            NavigationRail(
-              destinations: <NavigationRailDestination>[
-                NavigationRailDestination(
-                  icon: Icon(Icons.account_box_rounded),
-                  label: const Text("about me"),
-                ),
-                NavigationRailDestination(
-                  icon: Icon(Icons.favorite_outlined),
-                  label: const Text("images"),
-                ),
-                NavigationRailDestination(
-                  icon: Icon(Icons.account_box_rounded),
-                  label: const Text("favourite images"),
-                ),
-              ],
-              selectedIndex: _selectedIndex,
-              backgroundColor: themeColors[_selectedIndex],
-              onDestinationSelected: _onDestinationSelected,
-            ),
-            _mainPages[_selectedIndex],
-          ],
-        )),
+          body: Row(
+            children: [
+              NavigationRail(
+                destinations: const <NavigationRailDestination>[
+                  NavigationRailDestination(
+                    icon: Icon(Icons.account_box_rounded),
+                    label: Text("about me"),
+                  ),
+                  NavigationRailDestination(
+                    icon: Icon(Icons.image),
+                    label: Text("images"),
+                  ),
+                  NavigationRailDestination(
+                    icon: Icon(Icons.favorite_outlined),
+                    label: Text("favourite images"),
+                  ),
+                ],
+                selectedIndex: _selectedIndex,
+                backgroundColor: themeColors[_selectedIndex],
+                selectedIconTheme: const IconThemeData(color: Colors.white),
+                onDestinationSelected: _onDestinationSelected,
+              ),
+              Expanded(
+                child: _mainPages[_selectedIndex],
+              ),
+            ],
+          ),
+        ),
       );
     }
     return Theme(
@@ -95,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          shape: RoundedRectangleBorder(
+          shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
             bottomRight: Radius.circular(36),
           )),
@@ -105,16 +101,16 @@ class _MyHomePageState extends State<MyHomePage> {
         bottomNavigationBar: BottomNavigationBar(
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-                icon: Icon(Icons.account_box_rounded),
+                icon: const Icon(Icons.account_box_rounded),
                 label: "about me",
                 backgroundColor: themeColors[0]),
             BottomNavigationBarItem(
-              icon: Icon(Icons.image),
+              icon: const Icon(Icons.image),
               label: "images",
               backgroundColor: themeColors[1],
             ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.favorite_outlined),
+                icon: const Icon(Icons.favorite_outlined),
                 label: "favourite images",
                 backgroundColor: themeColors[2]),
           ],
