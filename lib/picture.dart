@@ -18,27 +18,27 @@ class Picture {
   Urls? urls;
   Links? links;
   User? user;
-  Image? image;
-
-  Picture(
-      {this.id,
-      this.createdAt,
-      this.updatedAt,
-      this.width,
-      this.height,
-      this.color,
-      this.blurHash,
-      this.downloads,
-      this.likes,
-      this.likedByUser,
-      this.description,
-      this.exif,
-      this.location,
-      this.currentUserCollections,
-      this.urls,
-      this.links,
-      this.user,
-      this.image});
+  late Image image;
+  final key = GlobalKey();
+  Picture({
+    this.id,
+    this.createdAt,
+    this.updatedAt,
+    this.width,
+    this.height,
+    this.color,
+    this.blurHash,
+    this.downloads,
+    this.likes,
+    this.likedByUser,
+    this.description,
+    this.exif,
+    this.location,
+    this.currentUserCollections,
+    this.urls,
+    this.links,
+    this.user,
+  });
 
   Picture.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -65,7 +65,7 @@ class Picture {
     urls = json['urls'] != null ? new Urls.fromJson(json['urls']) : null;
     links = json['links'] != null ? new Links.fromJson(json['links']) : null;
     user = json['user'] != null ? new User.fromJson(json['user']) : null;
-    image = Image.network(urls!.regular!, fit: BoxFit.fill);
+    image = Image.network(urls!.regular!, fit: BoxFit.fill, key: key);
   }
 }
 

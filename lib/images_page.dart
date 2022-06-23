@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:recruitment_task/api_service.dart';
 import 'package:recruitment_task/constants.dart';
 import 'package:recruitment_task/picture.dart';
+import 'package:recruitment_task/picture_tile.dart';
 
 class ImagesPage extends StatefulWidget {
   const ImagesPage({super.key});
@@ -20,30 +21,16 @@ class _ImagesPageState extends State<ImagesPage> {
           future: _pictures,
           builder: ((context, snapshot) {
             if (snapshot.hasData) {
-              return ListView.builder(
-                  itemCount: picturesToDisplay,
-                  padding: EdgeInsets.all(10.0),
+              return ListView.separated(
                   itemBuilder: ((context, index) {
-                    return ClipRRect(
-                        borderRadius: BorderRadius.circular(35),
-                        child: Column(
-                          children: [
-                            snapshot.data![index].image!,
-                            Flex(direction: Axis.horizontal, children: [
-                              Container(
-                                color: Colors.grey[800],
-                                child: const SizedBox(
-                                    height: 50,
-                                    //width: ,
-                                    child: const Text(
-                                      "Piekne zdjecie",
-                                      style: TextStyle(color: Colors.white),
-                                    )),
-                              ),
-                            ])
-                          ],
-                        ));
-                  }));
+                    return PictureTile(picture: snapshot.data![index]);
+                  }),
+                  separatorBuilder: (BuildContext context, int index) {
+                    return const SizedBox(
+                      height: 15,
+                    );
+                  },
+                  itemCount: picturesToDisplay);
             } else if (snapshot.hasError) {
               return Center(
                 child: Column(
