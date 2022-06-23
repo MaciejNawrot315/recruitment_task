@@ -1,3 +1,3 @@
 # recruitment_task
 
-Recruitment task for flutter inter
+Recruitment task for flutter intern
