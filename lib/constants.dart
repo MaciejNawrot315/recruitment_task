@@ -39,8 +39,12 @@ const Map<int, Color> myPinkMap = {
   900: Color.fromRGBO(221, 62, 84, 1),
 };
 const MaterialColor myPink = MaterialColor(0xFFdd3e54, myPinkMap);
+Color? appBackgroundColor = Colors.grey[850];
+Color? tileColor = Colors.grey[800];
+
 var themeColors = const [myGreen, myBlue, myPink];
 
 const String baseUrl = 'api.unsplash.com';
 const String photosEndpoint = '/photos';
 int picturesToDisplay = 30;
+double smallScreenBoundry = 768;

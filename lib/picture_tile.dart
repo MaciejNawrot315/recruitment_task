@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recruitment_task/constants.dart';
 import 'package:recruitment_task/picture.dart';
 import './details_page.dart';
 
@@ -10,7 +11,6 @@ class PictureTile extends StatefulWidget {
 }
 
 class _PictureTileState extends State<PictureTile> {
-  @override
   void _goToDetails(Picture picture) {
     Navigator.push(
       context,
@@ -19,23 +19,40 @@ class _PictureTileState extends State<PictureTile> {
     );
   }
 
+  @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height > 750
+        ? 750
+        : MediaQuery.of(context).size.height;
+    double imageWidth =
+        (widget.picture.width! / widget.picture.height!) * height;
     return LayoutBuilder(
       builder: (context, constraints) => Align(
           alignment: Alignment.center,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(36.0),
-            child: MediaQuery.of(context).size.width > 768
+            child: MediaQuery.of(context).size.width >
+                    smallScreenBoundry //Display
                 ? Container(
-                    color: Colors.grey[800],
-                    width: 696,
-                    height: 750,
+                    color: tileColor,
+                    width: smallScreenBoundry - 72,
+                    height: height,
                     child: Row(children: [
-                      SizedBox(width: 526, child: widget.picture.image!),
+                      SizedBox(
+                        width: smallScreenBoundry - 242,
+                        child: Center(
+                          child: SizedBox(
+                            width: imageWidth,
+                            child: Hero(
+                                tag: 'image${widget.picture.id}',
+                                child: widget.picture.image!),
+                          ),
+                        ),
+                      ),
                       const VerticalDivider(width: 1),
                       SizedBox(
-                        width: 169,
-                        height: 750,
+                        width: smallScreenBoundry - 599,
+                        height: height,
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(8, 20, 25, 8),
                           child: Column(
@@ -73,8 +90,10 @@ class _PictureTileState extends State<PictureTile> {
                   )
                 : Column(children: [
                     GestureDetector(
-                      onTap: () => debugPrint("picture clicked"),
-                      child: widget.picture.image!,
+                      onTap: () => _goToDetails(widget.picture),
+                      child: Hero(
+                          tag: 'image${widget.picture.id}',
+                          child: widget.picture.image!),
                     ),
                     Flex(
                         direction: Axis.horizontal,
@@ -84,7 +103,7 @@ class _PictureTileState extends State<PictureTile> {
                             fit: FlexFit.tight,
                             child: Container(
                                 height: 50,
-                                color: Colors.grey[800],
+                                color: tileColor,
                                 child: Padding(
                                   padding:
                                       const EdgeInsets.fromLTRB(10, 8, 25, 8),

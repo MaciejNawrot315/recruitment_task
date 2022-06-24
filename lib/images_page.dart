@@ -16,7 +16,7 @@ class _ImagesPageState extends State<ImagesPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.grey[850],
+      color: appBackgroundColor,
       child: FutureBuilder<List<Picture>>(
           future: _pictures,
           builder: ((context, snapshot) {

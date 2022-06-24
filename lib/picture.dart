@@ -19,7 +19,6 @@ class Picture {
   Links? links;
   User? user;
   Image? image;
-  final key = GlobalKey();
   Picture({
     this.id,
     this.createdAt,
@@ -65,7 +64,7 @@ class Picture {
     urls = json['urls'] != null ? new Urls.fromJson(json['urls']) : null;
     links = json['links'] != null ? new Links.fromJson(json['links']) : null;
     user = json['user'] != null ? new User.fromJson(json['user']) : null;
-    image = Image.network(urls!.regular!, fit: BoxFit.fill, key: key);
+    image = Image.network(urls!.regular!, fit: BoxFit.fill);
   }
 }
 
