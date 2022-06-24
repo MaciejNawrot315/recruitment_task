@@ -17,9 +17,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Recruitment Task',
       theme: ThemeData(
-          primarySwatch: myBlue,
-          backgroundColor: Colors.grey[850],
-          textTheme: TextTheme(headline3: TextStyle(color: Colors.white))),
+        primarySwatch: myBlue,
+        backgroundColor: Colors.grey[850],
+      ),
       home: const MyHomePage(),
     );
   }
