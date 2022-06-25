@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:recruitment_task/fav_images_model.dart';
 
 class FavouriteImagesPage extends StatefulWidget {
   const FavouriteImagesPage({super.key});
@@ -9,12 +11,11 @@ class FavouriteImagesPage extends StatefulWidget {
 class _FavouriteImagesPageState extends State<FavouriteImagesPage> {
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        ListTile(
-          title: const Text('I love my favourite pizza'),
-        )
-      ],
+    var favList = context.watch<FavImagesModel>();
+    return ListView.builder(
+      itemCount: favList.pictures.length,
+      itemBuilder: (context, index) =>
+          Text("author:${favList.pictures[index].user!.name}"),
     );
   }
 }

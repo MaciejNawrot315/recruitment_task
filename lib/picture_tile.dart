@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:recruitment_task/constants.dart';
+import 'package:recruitment_task/fav_images_model.dart';
 import 'package:recruitment_task/picture.dart';
 import './details_page.dart';
+import 'package:provider/provider.dart';
 
 class PictureTile extends StatefulWidget {
   final Picture picture;
@@ -12,8 +14,7 @@ class PictureTile extends StatefulWidget {
 
 class _PictureTileState extends State<PictureTile> {
   void _goToDetails(Picture picture) {
-    Navigator.push(
-      context,
+    Navigator.of(context).push(
       MaterialPageRoute(
           builder: (context) => DetailsPage(picture: widget.picture)),
     );
@@ -26,20 +27,43 @@ class _PictureTileState extends State<PictureTile> {
         : MediaQuery.of(context).size.height;
     double imageWidth =
         (widget.picture.width! / widget.picture.height!) * height;
+    bool isBig = MediaQuery.of(context).size.width > smallScreenBoundry;
+    bool isFavourite = context.select<FavImagesModel, bool>(
+        (favList) => favList.pictures.contains(widget.picture));
+
+    IconButton favButton = IconButton(
+      onPressed: isFavourite
+          ? () {
+              var favList = context.read<FavImagesModel>();
+              favList.remove(widget.picture);
+            }
+          : () {
+              var favList = context.read<FavImagesModel>();
+              favList.add(widget.picture);
+            },
+      icon: isFavourite
+          ? const Icon(
+              Icons.favorite,
+              color: Colors.pink,
+            )
+          : const Icon(Icons.favorite_border),
+      color: Colors.white,
+    );
     return LayoutBuilder(
       builder: (context, constraints) => Align(
           alignment: Alignment.center,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(36.0),
-            child: MediaQuery.of(context).size.width >
-                    smallScreenBoundry //Display
+            child: ((isBig) ||
+                    (MediaQuery.of(context).orientation ==
+                        Orientation.landscape)) //Display
                 ? Container(
                     color: tileColor,
-                    width: smallScreenBoundry - 72,
+                    width: isBig ? 700 : constraints.maxWidth,
                     height: height,
                     child: Row(children: [
                       SizedBox(
-                        width: smallScreenBoundry - 242,
+                        width: isBig ? 700 * 0.8 : constraints.maxWidth * 0.8,
                         child: Center(
                           child: SizedBox(
                             width: imageWidth,
@@ -51,7 +75,7 @@ class _PictureTileState extends State<PictureTile> {
                       ),
                       const VerticalDivider(width: 1),
                       SizedBox(
-                        width: smallScreenBoundry - 599,
+                        width: isBig ? 700 * 0.19 : constraints.maxWidth * 0.19,
                         height: height,
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(8, 20, 25, 8),
@@ -74,13 +98,8 @@ class _PictureTileState extends State<PictureTile> {
                                 padding:
                                     const EdgeInsets.fromLTRB(0, 25, 5, 10),
                                 child: Align(
-                                  alignment: Alignment.bottomRight,
-                                  child: IconButton(
-                                    icon: const Icon(Icons.favorite_border),
-                                    onPressed: () => debugPrint("favourite"),
-                                    color: Colors.white,
-                                  ),
-                                ),
+                                    alignment: Alignment.bottomRight,
+                                    child: favButton),
                               ),
                             ],
                           ),
@@ -116,12 +135,7 @@ class _PictureTileState extends State<PictureTile> {
                                         style: const TextStyle(
                                             color: Colors.white),
                                       ),
-                                      IconButton(
-                                        icon: const Icon(Icons.favorite_border),
-                                        onPressed: () =>
-                                            debugPrint("favourite"),
-                                        color: Colors.white,
-                                      ),
+                                      favButton
                                     ],
                                   ),
                                 )),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:recruitment_task/constants.dart';
 import './picture.dart';
+import 'package:recruitment_task/fav_images_model.dart';
 
 class DetailsPage extends StatefulWidget {
   final Picture picture;
@@ -182,10 +184,32 @@ class _DetailsState extends State<DetailsPage> {
 
   @override
   Widget build(BuildContext context) {
+    bool isFavourite = context.select<FavImagesModel, bool>(
+        (favList) => favList.pictures.contains(widget.picture));
+
+    IconButton favButton = IconButton(
+      onPressed: isFavourite
+          ? () {
+              var favList = context.read<FavImagesModel>();
+              favList.remove(widget.picture);
+            }
+          : () {
+              var favList = context.read<FavImagesModel>();
+              favList.add(widget.picture);
+            },
+      icon: isFavourite
+          ? const Icon(
+              Icons.favorite,
+              color: Colors.pink,
+            )
+          : const Icon(Icons.favorite_border),
+      color: Colors.white,
+    );
     return Scaffold(
         appBar: AppBar(),
         backgroundColor: appBackgroundColor,
-        body: MediaQuery.of(context).size.width > smallScreenBoundry
+        body: ((MediaQuery.of(context).size.width > smallScreenBoundry) ||
+                (MediaQuery.of(context).orientation == Orientation.landscape))
             ? Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 ClipRRect(
                     borderRadius: BorderRadius.circular(36),
@@ -233,13 +257,8 @@ class _DetailsState extends State<DetailsPage> {
                                   padding:
                                       const EdgeInsets.fromLTRB(0, 25, 5, 10),
                                   child: Align(
-                                    alignment: Alignment.bottomRight,
-                                    child: IconButton(
-                                      icon: const Icon(Icons.favorite_border),
-                                      onPressed: () => debugPrint("favourite"),
-                                      color: Colors.white,
-                                    ),
-                                  ),
+                                      alignment: Alignment.bottomRight,
+                                      child: favButton),
                                 ),
                               ],
                             ),
@@ -253,10 +272,15 @@ class _DetailsState extends State<DetailsPage> {
                   style: const TextStyle(color: Colors.white),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: details = [
+                    children: [
                       Hero(
                           tag: 'image${widget.picture.id}',
                           child: widget.picture.image!),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 10, 15, 0),
+                        child: Align(
+                            alignment: Alignment.topRight, child: favButton),
+                      ),
                       ...details
                     ],
                   ),

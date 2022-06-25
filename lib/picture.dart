@@ -51,19 +51,18 @@ class Picture {
     likes = json['likes'];
     likedByUser = json['liked_by_user'];
     description = json['description'];
-    exif = json['exif'] != null ? new Exif.fromJson(json['exif']) : null;
-    location = json['location'] != null
-        ? new Location.fromJson(json['location'])
-        : null;
+    exif = json['exif'] != null ? Exif.fromJson(json['exif']) : null;
+    location =
+        json['location'] != null ? Location.fromJson(json['location']) : null;
     if (json['current_user_collections'] != null) {
       currentUserCollections = <CurrentUserCollections>[];
       json['current_user_collections'].forEach((v) {
-        currentUserCollections!.add(new CurrentUserCollections.fromJson(v));
+        currentUserCollections!.add(CurrentUserCollections.fromJson(v));
       });
     }
-    urls = json['urls'] != null ? new Urls.fromJson(json['urls']) : null;
-    links = json['links'] != null ? new Links.fromJson(json['links']) : null;
-    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    urls = json['urls'] != null ? Urls.fromJson(json['urls']) : null;
+    links = json['links'] != null ? Links.fromJson(json['links']) : null;
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
     image = Image.network(urls!.regular!, fit: BoxFit.fill);
   }
 }
@@ -106,9 +105,8 @@ class Location {
     name = json['name'];
     city = json['city'];
     country = json['country'];
-    position = json['position'] != null
-        ? new Position.fromJson(json['position'])
-        : null;
+    position =
+        json['position'] != null ? Position.fromJson(json['position']) : null;
   }
 }
 
@@ -230,8 +228,7 @@ class User {
     totalCollections = json['total_collections'];
     instagramUsername = json['instagram_username'];
     twitterUsername = json['twitter_username'];
-    links =
-        json['links'] != null ? new UserLinks.fromJson(json['links']) : null;
+    links = json['links'] != null ? UserLinks.fromJson(json['links']) : null;
   }
 }
 
