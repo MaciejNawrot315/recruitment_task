@@ -1,5 +1,6 @@
 import 'package:provider/provider.dart';
 import 'package:recruitment_task/about_me_page.dart';
+import 'package:recruitment_task/animation_state_model.dart';
 import 'package:recruitment_task/fav_images_model.dart';
 import 'package:recruitment_task/favourite_images.dart';
 import 'package:recruitment_task/images_page.dart';
@@ -17,15 +18,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (context) => FavImagesModel(),
-        child: MaterialApp(
-          title: 'Recruitment Task',
-          theme: ThemeData(
-            primarySwatch: myBlue,
-            backgroundColor: Colors.grey[850],
-          ),
-          home: const MyHomePage(),
-        ));
+        create: (context) => AnimationStateModel(),
+        child: ChangeNotifierProvider(
+            create: (context) => FavImagesModel(),
+            child: MaterialApp(
+              title: 'Recruitment Task',
+              theme: ThemeData(
+                primarySwatch: myBlue,
+                backgroundColor: Colors.grey[850],
+              ),
+              home: const MyHomePage(),
+            )));
   }
 }
 
@@ -39,8 +42,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
   final List<Widget> _mainPages = [
-    const AboutMePage(),
-    const ImagesPage(),
+    AboutMePage(),
+    ImagesPage(),
     const FavouriteImagesPage(),
   ];
 
@@ -89,14 +92,14 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             )
           : Scaffold(
-              appBar: AppBar(
-                centerTitle: true,
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(36),
-                )),
-                title: const Text("About Me"),
-              ),
+              // appBar: AppBar(
+              //   centerTitle: true,
+              //   shape: const RoundedRectangleBorder(
+              //       borderRadius: BorderRadius.only(
+              //     bottomRight: Radius.circular(36),
+              //   )),
+              //   title: const Text("About Me"),
+              // ),
               body: _mainPages[_selectedIndex],
               bottomNavigationBar: BottomNavigationBar(
                 items: <BottomNavigationBarItem>[

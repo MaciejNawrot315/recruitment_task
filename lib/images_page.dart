@@ -5,12 +5,11 @@ import 'package:recruitment_task/picture.dart';
 import 'package:recruitment_task/picture_tile.dart';
 
 class ImagesPage extends StatefulWidget {
-  const ImagesPage({super.key});
+  ImagesPage({super.key});
+  Future<List<Picture>> _pictures = fetchPictures();
   @override
   State<ImagesPage> createState() => _ImagesPageState();
 }
-
-Future<List<Picture>> _pictures = fetchPictures();
 
 class _ImagesPageState extends State<ImagesPage> {
   @override
@@ -18,7 +17,7 @@ class _ImagesPageState extends State<ImagesPage> {
     return Container(
       color: appBackgroundColor,
       child: FutureBuilder<List<Picture>>(
-          future: _pictures,
+          future: widget._pictures,
           builder: ((context, snapshot) {
             if (snapshot.hasData) {
               return ListView.separated(
