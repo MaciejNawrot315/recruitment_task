@@ -238,7 +238,7 @@ class _DetailsState extends State<DetailsPage> {
                               : MediaQuery.of(context).size.width * 0.38,
                           height: 750,
                           child: Padding(
-                            padding: const EdgeInsets.fromLTRB(8, 20, 25, 8),
+                            padding: const EdgeInsets.fromLTRB(8, 20, 18, 8),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -277,7 +277,7 @@ class _DetailsState extends State<DetailsPage> {
                           tag: 'image${widget.picture.id}',
                           child: widget.picture.image!),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 10, 15, 0),
+                        padding: const EdgeInsets.fromLTRB(0, 8, 15, 0),
                         child: Align(
                             alignment: Alignment.topRight, child: favButton),
                       ),

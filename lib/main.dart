@@ -1,9 +1,10 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:recruitment_task/about_me_page.dart';
 import 'package:recruitment_task/animation_state_model.dart';
 import 'package:recruitment_task/fav_images_model.dart';
 import 'package:recruitment_task/favourite_images.dart';
-import 'package:recruitment_task/images_page.dart';
+import 'package:recruitment_task/pictures_page.dart';
 
 import './constants.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,8 @@ class MyApp extends StatelessWidget {
               theme: ThemeData(
                 primarySwatch: myBlue,
                 backgroundColor: Colors.grey[850],
+                textTheme:
+                    GoogleFonts.kanitTextTheme(Theme.of(context).textTheme),
               ),
               home: const MyHomePage(),
             )));
@@ -42,7 +45,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
   final List<Widget> _mainPages = [
-    AboutMePage(),
+    const AboutMePage(),
     ImagesPage(),
     const FavouriteImagesPage(),
   ];
@@ -92,14 +95,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             )
           : Scaffold(
-              // appBar: AppBar(
-              //   centerTitle: true,
-              //   shape: const RoundedRectangleBorder(
-              //       borderRadius: BorderRadius.only(
-              //     bottomRight: Radius.circular(36),
-              //   )),
-              //   title: const Text("About Me"),
-              // ),
               body: _mainPages[_selectedIndex],
               bottomNavigationBar: BottomNavigationBar(
                 items: <BottomNavigationBarItem>[

@@ -6,7 +6,7 @@ import 'package:recruitment_task/picture_tile.dart';
 
 class ImagesPage extends StatefulWidget {
   ImagesPage({super.key});
-  Future<List<Picture>> _pictures = fetchPictures();
+  final Future<List<Picture>> _pictures = fetchPictures();
   @override
   State<ImagesPage> createState() => _ImagesPageState();
 }

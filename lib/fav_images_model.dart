@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:recruitment_task/picture.dart';
 
 class FavImagesModel extends ChangeNotifier {
-  List<Picture> _favPictures = [];
+  final List<Picture> _favPictures = [];
 
   List<Picture> get pictures => _favPictures;
 

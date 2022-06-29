@@ -128,8 +128,8 @@ class CurrentUserCollections {
   String? publishedAt;
   String? lastCollectedAt;
   String? updatedAt;
-  Null? coverPhoto;
-  Null? user;
+  Null coverPhoto;
+  Null user;
 
   CurrentUserCollections(
       {this.id,

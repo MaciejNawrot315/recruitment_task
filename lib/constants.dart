@@ -39,6 +39,12 @@ const Map<int, Color> myPinkMap = {
   900: Color.fromRGBO(221, 62, 84, 1),
 };
 const MaterialColor myPink = MaterialColor(0xFFdd3e54, myPinkMap);
+
+const Color darkGreen = Color.fromARGB(255, 30, 100, 77);
+const Color coralRed = Color.fromARGB(255, 219, 128, 137);
+const Color darkerCoralRed = Color.fromARGB(255, 160, 26, 39);
+const Color boneWhite = Color.fromARGB(255, 241, 237, 238);
+
 Color? appBackgroundColor = Colors.grey[850];
 Color? tileColor = Colors.grey[800];
 

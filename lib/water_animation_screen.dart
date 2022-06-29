@@ -10,7 +10,7 @@ import 'package:recruitment_task/tap_clipper.dart';
 import 'constants.dart';
 
 class WaterAnimationScreen extends StatefulWidget {
-  WaterAnimationScreen({super.key});
+  const WaterAnimationScreen({super.key});
 
   @override
   State<WaterAnimationScreen> createState() => _WaterAnimationScreenState();
@@ -32,22 +32,6 @@ class _WaterAnimationScreenState extends State<WaterAnimationScreen>
 
   late AnimationController colorWaterController;
   late Animation colorWaterAnimation;
-
-  void _tapClicked() {
-    if (tapClickedCouter == 1) {
-      setState(() {
-        runningWaterController.forward();
-        tapTextHidden = true;
-      });
-      tapClickedCouter = 2;
-    }
-    if (tapClickedCouter == 0) {
-      setState(() {
-        tapOpacity = 1.0;
-      });
-      tapClickedCouter = 1;
-    }
-  }
 
   @override
   void initState() {
@@ -74,10 +58,11 @@ class _WaterAnimationScreenState extends State<WaterAnimationScreen>
       }
     });
     colorWaterController = AnimationController(
-        duration: const Duration(milliseconds: 500), vsync: this);
+        duration: const Duration(milliseconds: 450), vsync: this);
 
     colorWaterAnimation =
         Tween(begin: 0.0, end: 1.0).animate(colorWaterController);
+
     colorWaterController.addStatusListener((status) {
       var aniState = context.read<AnimationStateModel>();
 
@@ -116,17 +101,23 @@ class _WaterAnimationScreenState extends State<WaterAnimationScreen>
                         width: tapWidth,
                         child: Column(
                           children: [
-                            ClipPath(
-                              clipper: TapClipper(),
-                              child: AnimatedOpacity(
-                                opacity: tapOpacity,
-                                duration: const Duration(milliseconds: 500),
-                                child: Container(
-                                  alignment: Alignment.topLeft,
-                                  height: tapHeight,
-                                  color: appBackgroundColor,
+                            GestureDetector(
+                              child: ClipPath(
+                                clipper: TapClipper(),
+                                child: AnimatedOpacity(
+                                  opacity: tapOpacity,
+                                  duration: const Duration(milliseconds: 500),
+                                  child: Container(
+                                    alignment: Alignment.topLeft,
+                                    height: tapHeight,
+                                    color: appBackgroundColor,
+                                  ),
                                 ),
                               ),
+                              onTap: () => setState(() {
+                                runningWaterController.forward();
+                                tapTextHidden = true;
+                              }),
                             ),
                             Align(
                               alignment: Alignment.topRight,
@@ -146,24 +137,32 @@ class _WaterAnimationScreenState extends State<WaterAnimationScreen>
                       Center(
                         child: tapTextHidden
                             ? null
-                            : Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Transform.rotate(
-                                      angle: atan(constraints.maxHeight /
-                                          constraints.maxWidth),
-                                      child: AnimatedOpacity(
-                                          opacity: tapOpacity,
-                                          duration:
-                                              const Duration(milliseconds: 300),
-                                          child: const Icon(Icons.arrow_back))),
-                                  RichText(
-                                    text: TextSpan(
-                                        text: "Tap",
-                                        recognizer: TapGestureRecognizer()
-                                          ..onTap = (() => _tapClicked())),
-                                  ),
-                                ],
+                            : Transform.scale(
+                                scale: 4.0,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Transform.rotate(
+                                        angle: atan(constraints.maxHeight /
+                                            constraints.maxWidth),
+                                        child: AnimatedOpacity(
+                                            opacity: tapOpacity,
+                                            duration: const Duration(
+                                                milliseconds: 300),
+                                            child: const Icon(
+                                                Icons.arrow_back_rounded))),
+                                    RichText(
+                                      text: TextSpan(
+                                          text: "Tap",
+                                          style: const TextStyle(
+                                              color: Colors.black),
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = (() => setState(() {
+                                                  tapOpacity = 1.0;
+                                                }))),
+                                    ),
+                                  ],
+                                ),
                               ),
                       ),
                     ],
