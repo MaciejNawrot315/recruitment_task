@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
   final List<Widget> _mainPages = [
     const AboutMePage(),
-    ImagesPage(),
+    PicturesPage(),
     const FavouriteImagesPage(),
   ];
 

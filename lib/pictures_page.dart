@@ -1,17 +1,44 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:recruitment_task/api_service.dart';
 import 'package:recruitment_task/constants.dart';
 import 'package:recruitment_task/picture.dart';
 import 'package:recruitment_task/picture_tile.dart';
+import 'package:http/http.dart' as http;
 
-class ImagesPage extends StatefulWidget {
-  ImagesPage({super.key});
-  final Future<List<Picture>> _pictures = fetchPictures();
+class PicturesPage extends StatefulWidget {
+  PicturesPage({super.key});
+  Future<List<Picture>> fetchPictures() async {
+    const JsonDecoder decoder = JsonDecoder();
+    final queryParameters = {
+      // 'query': "capybara",
+      'count': picturesToDisplay.toString()
+    };
+    var url = Uri.https(baseUrl, '$photosEndpoint/random', queryParameters);
+    var response = await http.get(url, headers: {
+      'Accept-Version': 'v1',
+      'Authorization': 'Client-ID NPVcu7PntHBText7CYd86FSnBkcvwrqxwueK19f8X1Q'
+    });
+    final List<dynamic> pictureMapList = decoder.convert(response.body);
+    List<Picture> pictureList = [];
+    for (Map i in pictureMapList) {
+      pictureList.add(Picture.fromJson(i as Map<String, dynamic>));
+    }
+
+    return pictureList;
+  }
+
+  late final Future<List<Picture>> _pictures = fetchPictures();
   @override
-  State<ImagesPage> createState() => _ImagesPageState();
+  State<PicturesPage> createState() => _PicturesPageState();
 }
 
-class _ImagesPageState extends State<ImagesPage> {
+class _PicturesPageState extends State<PicturesPage> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(

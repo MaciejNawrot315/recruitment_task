@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:recruitment_task/constants.dart';
 import 'package:recruitment_task/fav_images_model.dart';
 import 'package:recruitment_task/picture_tile.dart';
 

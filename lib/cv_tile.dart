@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:recruitment_task/constants.dart';
 
 class CvTile extends StatelessWidget {
@@ -42,7 +43,12 @@ class CvTile extends StatelessWidget {
                   ],
                 ),
               ),
-              body
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: DefaultTextStyle(
+                    style: GoogleFonts.karla(color: Colors.black, fontSize: 18),
+                    child: body),
+              )
             ],
           )),
     );
