@@ -121,14 +121,13 @@ class _PictureTileState extends State<PictureTile> {
                           Flexible(
                             fit: FlexFit.tight,
                             child: Container(
-                                height: 50,
                                 color: tileColor,
                                 child: Padding(
                                   padding:
                                       const EdgeInsets.fromLTRB(10, 8, 25, 8),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                  child: Wrap(
+                                    crossAxisAlignment:
+                                        WrapCrossAlignment.center,
                                     children: [
                                       Text(
                                         "  author: ${widget.picture.user!.name}",

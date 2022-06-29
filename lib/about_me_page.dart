@@ -246,7 +246,7 @@ class _AboutMePageState extends State<AboutMePage>
           Icons.cottage_rounded,
           color: darkGreen,
         ),
-        body: Row(
+        body: Wrap(
           children: [
             Image.asset(
               'assets/git.png',
@@ -267,10 +267,15 @@ class _AboutMePageState extends State<AboutMePage>
           style: TextStyle(fontSize: 8, color: Colors.grey),
         ))
   ];
+  bool isSmall() {
+    return MediaQuery.of(context).size.width < 460;
+  }
+
   @override
   Widget build(BuildContext context) {
     var aniState = context.read<AnimationStateModel>();
     bool animationFinished = aniState.state;
+
     return DefaultTextStyle(
       style: const TextStyle(color: Colors.white),
       child: LayoutBuilder(
@@ -283,7 +288,7 @@ class _AboutMePageState extends State<AboutMePage>
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 250,
+                      height: isSmall() ? 350 : 250,
                       child: Stack(children: [
                         Container(
                           decoration: const BoxDecoration(
@@ -342,7 +347,9 @@ class _AboutMePageState extends State<AboutMePage>
                               )),
                         ),
                         Align(
-                          alignment: const Alignment(0.9, 0.85),
+                          alignment: isSmall()
+                              ? const Alignment(0.0, 0.95)
+                              : const Alignment(0.9, 0.85),
                           child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
@@ -360,7 +367,9 @@ class _AboutMePageState extends State<AboutMePage>
                               )),
                         ),
                         Align(
-                          alignment: const Alignment(-0.95, 0.85),
+                          alignment: isSmall()
+                              ? const Alignment(0.0, 0.80)
+                              : const Alignment(-0.95, 0.85),
                           child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
